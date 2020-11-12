@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="../static/bootstrap.min.css" th:href="@{/bootstrap.min.css}" /> 
+<title>Flower Shop Inventory</title>
+</head>
+
+<body>
+	<div class="row justify-content-center">
+		<div class="col-auto">
+			<a href="/inventory" class="btn btn-sm btn-outline-info">&lt;&lt; Back to inventory listing</a>	
+			<div style="clear: both; display: block; height: 30px;"></div>	
+			<h2>Edit plant information</h2>
+			<div style="clear: both; display: block; height: 20px;"></div>
+				<div>
+					<form th:object="${plant}" th:action="@{save}" action="#" method="post" class="form-horizontal">
+						<div class="form-group row">
+						  	<label for="name" class="col-sm-4 control-label">Plant name:</label>
+							<div class="col-sm-8"><input class="form-control" type="text" id="plantname" th:field="*{name}" /></div>
+						</div>
+						<div class="form-group row">
+						  	<label for="name" class="col-sm-4 control-label">Scientific name:</label>
+							<div class="col-sm-8"><input class="form-control" type="text" id="plantlatin" th:field="*{latin}" /></div>
+						</div>
+						<div class="form-group row">
+							<label for="price" class="col-sm-4 control-label">Price:</label>
+							<div class="col-sm-8"><input class="form-control" type="text" id="plantprice" th:field="*{price}" /></div>
+						</div>
+<!-- 						<div class="form-group row">						
+							<label for="edible" class="col-sm-4 control-label">Edible?</label>
+							<select id="eatlist" th:field="*{edible}" class="form-control">
+								<option th:each="edible:${edibility}" th:value="${edible.edibility}" th:text="${edible.edibility}"></option>
+							</select> 
+						</div> -->
+						<div class="form-group row">						
+							<label for="location" class="col-sm-4 control-label">Location:</label>
+							<div class="col-sm-8">
+							<select id="loclist" class="form-control" th:field="*{location}">
+								<option th:each="location:${locations}" th:value="${location.locId}" th:text="${location.locName}"></option>
+							</select>
+							</div>
+						</div>
+						<input type="submit" class="btn btn-success" value="Save"></input>
+					</form>
+				</div>
+		</div>
+	</div>
+	
+</body>
+
+</html>

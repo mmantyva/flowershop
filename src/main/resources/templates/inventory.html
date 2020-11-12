@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="../static/bootstrap.min.css" th:href="@{/bootstrap.min.css}" /> 
+<title>Flower Shop Inventory</title>
+</head>
+<body>
+	<div class="row justify-content-center">
+		<div class="col-auto">
+			<div style="clear: both; display: block; height: 50px;"></div>
+			<h2>Inventory</h2>
+			<div style="clear: both; display: block; height: 20px;"></div>		
+			<table class="table table-sm table-bordered table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Plant name</th>
+						<th>Scientific name</th>
+						<th>Price</th>
+<!--  						<th>Edible?</th> -->
+						<th>Location</th>
+						<th>Functions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="plant:${plants}">
+						<td th:text="${plant.name}"></td>
+						<td th:text="${plant.latin}"></td>
+						<td th:text="${plant.price}"></td>
+<!--  						<td th:text="${plant.edible.edibility}"></td> -->
+						<td th:text="${plant.location.locName}"></td>
+						<td><a th:href="@{/delete/{plantId}(plantId=${plant.plantId})}" class="btn btn-sm btn-danger">Delete</a>
+						<a th:href="@{/edit/{plantId}(plantId=${plant.plantId})}" class="btn btn-sm btn-info">Edit</a></td>
+					</tr>
+				</tbody>
+			</table>
+		<a href="/add" class="btn btn-primary">Add item</a>
+		</div>
+	</div>
+</body>
+</html>
