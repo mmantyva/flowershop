@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface PlantRepository extends CrudRepository<Plant, Long> {
-	List<Plant> findByName(String name);
+public interface UsageRepository extends CrudRepository<Usage, String> {
+
+	List<Usage> findByUse(String use);
 }

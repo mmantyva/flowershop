@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="../css/static/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+<title>Log In</title>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#locales").change(function () {
+                var selectedOption = $('#locales').val();
+                if (selectedOption !== ''){
+                    window.location.replace('login?lang=' + selectedOption);
+                }
+            });
+        });
+    </script> -->
+</head>
+<body>
+	<div style="clear: both; display: block; height: 20px;"></div>
+	<div th:if="${param.error}" class="col text-center">
+		Check your username &#38; password!
+	</div>
+	<div th:if="${param.logout}" class="col text-center">
+		You have been logged out.
+	</div>	
+	<div class="row justify-content-center">
+		<div class="col-auto">
+			<div style="clear: both; display: block; height: 50px;"></div>
+			<div class="col text-center">
+<!-- 				<span th:text="#{lang.change}"></span>:
+				<select id="locales">
+				    <option value="en" th:text="#{lang.en}"></option>
+				    <option value="fi" th:text="#{lang.fi}"></option>
+				</select> -->
+			<div style="clear: both; display: block; height: 20px;"></div>
+<!-- 				<h2 th:text="#{welcome}"></h2> -->
+				<h2>Welcome!</h2>
+				<h2>&#127808;</h2>
+				<h2>Please log in:</h2>
+<!-- 				<h2 th:text="#{logging}"></h2> -->
+			</div>
+			<div style="clear: both; display: block; height: 50px;"></div>
+			<form th:action="@{/login}" method="post" class="form-horizontal">
+				<div class="form-group row">
+					<label for="username" class="col-sm-4 control-label">Username: </label>
+					<div class="col-sm-7"><input type="text" name="username" /></div>
+				</div>
+				<div class="form-group row">
+					<label for="password" class="col-sm-4 control-label">Password: </label>
+					<div class="col-sm-7"><input type="password" name="password" /></div>
+				</div>
+				<div style="clear: both; display: block; height: 20px;"></div>
+				<div class="col text-center">
+					<input type="submit" value="Log In" class="btn btn-success" />
+				</div>
+				<div style="clear: both; display: block; height: 20px;"></div>
+			</form>
+			<div class="col text-center">
+				<a href="/inventory" class="btn btn-sm btn-outline-secondary">Proceed without logging in &gt;&gt;</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

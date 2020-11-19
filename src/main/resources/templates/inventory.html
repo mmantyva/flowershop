@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta http-equiv="content-type" content="text/html" charset="UTF-8">
-<link type="text/css" rel="stylesheet" href="../static/bootstrap.min.css" th:href="@{/bootstrap.min.css}" /> 
+<link type="text/css" rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
 <title>Flower Shop Inventory</title>
 </head>
 <body>
 	<div class="row justify-content-center">
 		<div class="col-auto">
-			<div style="clear: both; display: block; height: 50px;"></div>
+			<div style="clear: both; display: block; height: 20px;"></div>
+			<div sec:authorize="hasAuthority('ADMIN')" class="col-md-12 text-right">
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" value="Log Out" class="btn btn-warning" />
+				</form>
+			</div>
+			<div style="clear: both; display: block; height: 30px;"></div>		
 			<h2>Inventory</h2>
 			<div style="clear: both; display: block; height: 20px;"></div>		
 			<table class="table table-sm table-bordered table-striped table-hover">
@@ -17,9 +23,9 @@
 						<th>Plant name</th>
 						<th>Scientific name</th>
 						<th>Price</th>
-<!--  						<th>Edible?</th> -->
+ 						<th>Usage</th> 
 						<th>Location</th>
-						<th>Functions</th>
+						<th sec:authorize="hasAuthority('ADMIN')">Functions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -27,14 +33,15 @@
 						<td th:text="${plant.name}"></td>
 						<td th:text="${plant.latin}"></td>
 						<td th:text="${plant.price}"></td>
-<!--  						<td th:text="${plant.edible.edibility}"></td> -->
+  						<td th:text="${plant.usage.use}"></td> 
 						<td th:text="${plant.location.locName}"></td>
-						<td><a th:href="@{/delete/{plantId}(plantId=${plant.plantId})}" class="btn btn-sm btn-danger">Delete</a>
+						<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{plantId}(plantId=${plant.plantId})}" class="btn btn-sm btn-danger">Delete</a>
 						<a th:href="@{/edit/{plantId}(plantId=${plant.plantId})}" class="btn btn-sm btn-info">Edit</a></td>
 					</tr>
 				</tbody>
 			</table>
-		<a href="/add" class="btn btn-primary">Add item</a>
+		<div style="clear: both; display: block; height: 20px;"></div>		
+		<div sec:authorize="hasAuthority('ADMIN')" class="col text-center"><a href="/add" class="btn btn-success">Add item</a></div>
 		</div>
 	</div>
 </body>

@@ -6,33 +6,46 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+//import javax.validation.constraints.NotNull;
+//import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Plant {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long plantId;
-	private String name, latin;
+//	@NotNull(message="Name can't be empty")
+//	@Size(min=10, max=100, message="Name must be at least 2 characters")
+	private String name;
+	private String latin;
+//	@NotNull(message="Price can't be empty")	
 	private double price;
 	
 	@ManyToOne
+	@JsonManagedReference
 	@JoinColumn(name="locId")
+//	@NotNull(message="Please select item location")
 	private Location location;
 	
-//	@ManyToOne
-//	@JoinColumn(name="edibility")
-//	private Edible edible;
-//	
+	@ManyToOne
+	@JsonManagedReference
+	@JoinColumn(name="use")
+//	@NotNull(message="Please select item usage")
+	private Usage usage;
+	
 	public Plant() {
 
 	}
 	
-	public Plant(String name, String latin, double price, Location location) {
+	public Plant(String name, String latin, double price, Location location, Usage usage) {
 		super();
 		this.name = name;
 		this.latin = latin;
 		this.price = price;
 		this.location = location;
+		this.usage = usage;
 	}
 
 	public Long getPlantId() {
@@ -76,13 +89,13 @@ public class Plant {
 		this.location = location;
 	}
 	
-//	public Edible getEdible() {
-//		return edible;
-//	}
-//	
-//	public void setEdible(Edible edible) {
-//		this.edible = edible;
-//	}
+	public Usage getUsage() {
+		return usage;
+	}
+	
+	public void setUsage(Usage usage) {
+		this.usage = usage;
+	}
 
 	@Override
 	public String toString() {
