@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import hh.swd20.flowershop.domain.UsageRepository;
 import hh.swd20.flowershop.domain.LocationRepository;
@@ -70,7 +71,7 @@ import hh.swd20.flowershop.domain.PlantRepository;
     
 	
 	// lisäys
-	@RequestMapping(value="/add")
+	@GetMapping(value="/add")
 	public String addItem(Model model) {
 		model.addAttribute("plant", new Plant());
 		model.addAttribute("locations", lrepository.findAll());
@@ -79,7 +80,7 @@ import hh.swd20.flowershop.domain.PlantRepository;
 	}
 
 	// lisäyksen tallennus
-	@PostMapping(value="/save")
+	@PostMapping(value="/add")
 	public String saveItem(@Valid Plant plant, BindingResult bindingResult, Model model) {		
 		if (bindingResult.hasErrors()) {
         	return "additem";
@@ -91,14 +92,14 @@ import hh.swd20.flowershop.domain.PlantRepository;
 	
 	// muokkaus
 	@PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping(value="/edit/{plantId}")
+    @RequestMapping(value="/edit/{plantId}", method=RequestMethod.GET)
     public String editItem(@PathVariable("plantId") Long itemId, Model model) {
     	model.addAttribute("plant", prepository.findById(itemId));
     	model.addAttribute("locations", lrepository.findAll());   	
     	model.addAttribute("uses", urepository.findAll());
 		return "edititem";
     }
-
+	
 }
 
 
