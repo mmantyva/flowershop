@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import hh.swd20.flowershop.domain.UsageRepository;
 import hh.swd20.flowershop.domain.LocationRepository;
 
 import hh.swd20.flowershop.domain.Plant;
 import hh.swd20.flowershop.domain.PlantRepository;
+import hh.swd20.flowershop.domain.Usage;
 
 	
 @Controller
@@ -49,28 +49,33 @@ import hh.swd20.flowershop.domain.PlantRepository;
 		return "inventory";
 	}
 	
-	// REST, näytä kaikki
+	// REST, näytä kaikki tavarat
     @GetMapping(value="/allrest")
     public @ResponseBody List<Plant> allRest() {	
         return (List<Plant>) prepository.findAll();
     } 
+    
+    // REST, käyttötarkoitukset
+    @GetMapping(value="/uses")
+    public @ResponseBody List<Usage> usageRest(){
+    	return (List<Usage>) urepository.findAll();
+    }
     
 	// REST, hae yksi id:n perusteella
     @GetMapping(value="/allrest/{id}")
     public @ResponseBody Optional<Plant> oneRest(@PathVariable("id") Long plantId) {	
     	return prepository.findById(plantId);
     } 
-	
+    
     // poisto
     @PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping(value="/delete/{plantId}")
-	public String deleteItem(@PathVariable("plantId") Long itemId, Model model) {
-		prepository.deleteById(itemId);
+	public String deleteItem(@PathVariable("plantId") Long plantId, Model model) {
+		prepository.deleteById(plantId);
 		return "redirect:../inventory";
 	}
-    
 	
-	// lisäys
+	// lisäys, OK
 	@GetMapping(value="/add")
 	public String addItem(Model model) {
 		model.addAttribute("plant", new Plant());
@@ -81,8 +86,8 @@ import hh.swd20.flowershop.domain.PlantRepository;
 
 	// lisäyksen tallennus
 	@PostMapping(value="/add")
-	public String saveItem(@Valid Plant plant, BindingResult bindingResult, Model model) {		
-		if (bindingResult.hasErrors()) {
+	public String saveItem(@Valid Plant plant, BindingResult result, Model model) {		
+		if (result.hasErrors()) {
         	return "additem";
         } else {
         	prepository.save(plant);
@@ -92,14 +97,16 @@ import hh.swd20.flowershop.domain.PlantRepository;
 	
 	// muokkaus
 	@PreAuthorize("hasAuthority('ADMIN')")
-    @RequestMapping(value="/edit/{plantId}", method=RequestMethod.GET)
+    @GetMapping(value="/edit/{plantId}")
     public String editItem(@PathVariable("plantId") Long itemId, Model model) {
     	model.addAttribute("plant", prepository.findById(itemId));
     	model.addAttribute("locations", lrepository.findAll());   	
     	model.addAttribute("uses", urepository.findAll());
 		return "edititem";
     }
-	
+
+
+
 }
 
 

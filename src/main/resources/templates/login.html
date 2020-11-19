@@ -7,8 +7,8 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#locales").change(function () {
-                var selectedOption = $('#locales').val();
+            $("#language").change(function () {
+                var selectedOption = $('#language').val();
                 if (selectedOption !== ''){
                     window.location.replace('login?lang=' + selectedOption);
                 }
@@ -29,7 +29,7 @@
 			<div style="clear: both; display: block; height: 50px;"></div>
 			<div class="col text-center">
  				<span th:text="#{lang.change}"></span>:
-				<select id="locales">
+				<select id="language">
 					<option value=""></option>
 				    <option value="en" th:text="#{lang.en}"></option>
 				    <option value="fi" th:text="#{lang.fi}"></option>

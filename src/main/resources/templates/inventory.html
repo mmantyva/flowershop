@@ -7,8 +7,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#locales").change(function () {
-                var selectedOption = $('#locales').val();
+            $("#language").change(function () {
+                var selectedOption = $('#language').val();
                 if (selectedOption !== ''){
                     window.location.replace('inventory?lang=' + selectedOption);
                 }
@@ -22,7 +22,7 @@
 		<div style="clear: both; display: block; height: 50px;"></div>
 			<div class="col text-center">
  				<span th:text="#{lang.change}"></span>:
-				<select id="locales">
+				<select id="language">
 					<option value=""></option>
 				    <option value="en" th:text="#{lang.en}"></option>
 				    <option value="fi" th:text="#{lang.fi}"></option>
@@ -33,6 +33,12 @@
 					<input type="submit" value="Log Out" class="btn btn-warning" />
 				</form>
 			</div>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<span>For demonstration purposes: </span>	
+			<a href="/allrest" class="btn btn-sm btn-outline-success">REST: Show all items (admin only) </a>
+			<a href="/uses" class="btn btn-sm btn-outline-success">REST: Show all uses (admin only) </a>
+			<a href="/delete/5" class="btn btn-sm btn-outline-success">Delete by id (admin only)</a>
+			<a href="login" class="btn btn-sm btn-outline-success">Back to login</a>
 			<div style="clear: both; display: block; height: 30px;"></div>		
 			<h2><span th:text="#{inventory.title}"></span></h2>
 			<div style="clear: both; display: block; height: 20px;"></div>		
