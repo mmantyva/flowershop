@@ -10,24 +10,28 @@
 	<div class="row justify-content-center">
 		<div class="col-auto">
 			<div class="text-right">
+				<div style="clear: both; display: block; height: 20px;"></div>	
 				<a href="/inventory" class="btn btn-sm btn-outline-info">&lt;&lt; Back to inventory listing</a>	
 			</div>
 			<div style="clear: both; display: block; height: 30px;"></div>		
 			<h2>Add an item</h2>
 			<div style="clear: both; display: block; height: 20px;"></div>		
 				<div>
-					<form th:object="${plant}" th:action="@{save}" action="#" method="post" class="form-horizontal">
+					<form action="#" th:object="${plant}" th:action="@{/save}" method="post" class="form-horizontal">
 						<div class="form-group row">
 						  	<label for="name" class="col-sm-4 control-label">Plant name:</label>
 							<div class="col-sm-8"><input class="form-control" placeholder="e.g. Sunflower" type="text" id="name" th:field="*{name}" /></div>
+							<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</span>
 						</div>
 						<div class="form-group row">
 						  	<label for="name" class="col-sm-4 control-label">Scientific name:</label>
 							<div class="col-sm-8"><input class="form-control" placeholder="e.g. Helianthus annuus" type="text" id="latin" th:field="*{latin}" /></div>
+							<span th:if="${#fields.hasErrors('latin')}" th:errors="*{latin}">Error</span>
 						</div>
 						<div class="form-group row">
 							<label for="price" class="col-sm-4 control-label">Price (€):</label>
 							<div class="col-sm-8"><input class="form-control" placeholder="e.g. 4.99" type="number" min="0.01" step="any" id="price" th:field="*{price}" /></div>
+							<span th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Error</span>
 						</div>
  						<div class="form-group row">						
 							<label for="usage" class="col-sm-4 control-label">Usage:</label>

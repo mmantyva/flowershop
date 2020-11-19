@@ -23,7 +23,7 @@ protected void configure(HttpSecurity http) throws Exception {
 	http
 		.authorizeRequests()
 			.antMatchers("/additem", "/edititem").hasRole("Admin")
-			.antMatchers("/css/**", "/inventory", "/login").permitAll().anyRequest().authenticated()
+			.antMatchers("/css/**", "/inventory", "/login", "/h2-console/**").permitAll().anyRequest().authenticated()
 			.and()
 		.formLogin()
 			.loginPage("/login")

@@ -3,13 +3,13 @@ package hh.swd20.flowershop.web;
 import java.util.List;
 import java.util.Optional;
 
-//import javax.validation.Valid;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-//import org.springframework.validation.BindingResult;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import hh.swd20.flowershop.domain.UsageRepository;
 import hh.swd20.flowershop.domain.LocationRepository;
+
 import hh.swd20.flowershop.domain.Plant;
 import hh.swd20.flowershop.domain.PlantRepository;
 
@@ -34,6 +35,11 @@ import hh.swd20.flowershop.domain.PlantRepository;
     public String login() {	
         return "login";
     }	
+	
+	@RequestMapping(value="/success")
+    public String success() {	
+        return "success";
+    }
 	
 	// näytä kaikki
 	@RequestMapping("/inventory")
@@ -61,6 +67,7 @@ import hh.swd20.flowershop.domain.PlantRepository;
 		prepository.deleteById(itemId);
 		return "redirect:../inventory";
 	}
+    
 	
 	// lisäys
 	@RequestMapping(value="/add")
@@ -70,17 +77,16 @@ import hh.swd20.flowershop.domain.PlantRepository;
 		model.addAttribute("uses", urepository.findAll());
 		return "additem";
 	}
-	
-	//
+
 	// lisäyksen tallennus
 	@PostMapping(value="/save")
-	public String saveItem( Plant plant) {
-// , BindingResult bindingResult, Model model		
-//		if (bindingResult.hasErrors()) {
-//        	return "additem";
-//        }
-		prepository.save(plant);
-		return "redirect:inventory";
+	public String saveItem(@Valid Plant plant, BindingResult bindingResult, Model model) {		
+		if (bindingResult.hasErrors()) {
+        	return "additem";
+        } else {
+        	prepository.save(plant);
+        	return "success";
+        }
 	}
 	
 	// muokkaus
