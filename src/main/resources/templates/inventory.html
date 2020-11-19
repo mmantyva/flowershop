@@ -36,7 +36,7 @@
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<span>For demonstration purposes: </span>	
 			<a href="/allrest" class="btn btn-sm btn-outline-success">REST: Show all items (admin only) </a>
-			<a href="/uses" class="btn btn-sm btn-outline-success">REST: Show all uses (admin only) </a>
+			<a href="/locations" class="btn btn-sm btn-outline-success">REST: Show all locations (admin only) </a>
 			<a href="/delete/5" class="btn btn-sm btn-outline-success">Delete by id (admin only)</a>
 			<a href="login" class="btn btn-sm btn-outline-success">Back to login</a>
 			<div style="clear: both; display: block; height: 30px;"></div>		
@@ -67,6 +67,8 @@
 			</table>
 		<div style="clear: both; display: block; height: 20px;"></div>		
 		<div sec:authorize="hasAuthority('ADMIN')" class="col text-center"><a href="/add" class="btn btn-success">Add item</a></div>
+		<div style="clear: both; display: block; height: 20px;"></div>
+		<div sec:authorize="hasAuthority('ADMIN')" class="col text-center"><a href="/addloc" class="btn btn-secondary">Add location</a></div>
 		</div>
 	</div>
 	</div>

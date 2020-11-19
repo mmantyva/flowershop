@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<link type="text/css" rel="stylesheet" href="../css/static/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+<title>Flower Shop Inventory</title>
+</head>
+
+<body>
+	<div class="row justify-content-center">
+		<div class="col-auto">
+			<div class="text-right">
+				<div style="clear: both; display: block; height: 20px;"></div>	
+				<a href="/inventory" class="btn btn-sm btn-outline-info">&lt;&lt; Back to inventory listing</a>	
+			</div>
+			<div style="clear: both; display: block; height: 30px;"></div>		
+			<h2>Add an item</h2>
+			<div style="clear: both; display: block; height: 20px;"></div>		
+				<div>
+					<form action="#" th:object="${location}" th:action="@{/addloc}" method="post" class="form-horizontal">
+						<div class="form-group row">
+						  	<label for="name" class="col-sm-4 control-label">Location name:</label>
+						  	<div class="col-sm-8"><input class="form-control" type="text" id="name" th:field="*{locName}" /></div>
+							<div class="col text-right">
+								<span class="text-danger" th:if="${#fields.hasErrors('locName')}" th:errors="*{locName}"></span>
+							</div>
+						</div>
+						<div class="form-group row">
+						  	<label for="address" class="col-sm-4 control-label">Location address:</label>
+							<div class="col-sm-8"><input class="form-control" type="text" id="latin" th:field="*{address}" /></div>
+						</div>
+						<div class="form-group row">
+							<label for="phone" class="col-sm-4 control-label">Phone number:</label>
+							<div class="col-sm-8"><input class="form-control" step="any" id="phone" th:field="*{phone}" /></div>
+						</div>
+						<div class="form-group row">
+							<label for="phone" class="col-sm-4 control-label">Contact person:</label>
+							<div class="col-sm-8"><input class="form-control" step="any" id="contact" th:field="*{contact}" /></div>
+							<div class="col text-right">
+								<span class="text-danger" th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}"></span>
+							</div>
+						</div>
+						<div style="clear: both; display: block; height: 20px;"></div>
+						<div class="text-center">
+							<input type="submit" class="btn btn-success" value="Save"></input>
+						</div>
+					</form>
+				</div>
+		</div>
+	</div>
+	
+</body>
+
+</html>

@@ -67,9 +67,9 @@ public class FlowershopApplication implements WebMvcConfigurer {
 			userrepository.save(user1);
 			
 			// location demo data
-			lrepository.save(new Location("In store"));
-			lrepository.save(new Location("In warehouse"));
-			lrepository.save(new Location("Out of stock"));
+			lrepository.save(new Location("In store", "Espoo", "0401234567", "Jenny"));
+			lrepository.save(new Location("In warehouse", "Helsinki", "0449876543", "Jussi"));
+			lrepository.save(new Location("Out of stock", "", "", "Susanna"));
 			
 			// usage demo data
 			Usage option1 = new Usage("Potted plant");
